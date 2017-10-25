@@ -25,33 +25,37 @@ namespace DragonsLair_1
 
         public List<Team> GetWinningTeams()
         {
-            //foreach (Match m in matches)
-            //{
-            //    if (m.FirstOpponent == m.Winner)
-            //    {
-            //        GetWinningTeams().Add(m.FirstOpponent);
-            //    }
-            //    else
-            //    {
-            //        GetWinningTeams().Add(m.SecondOpponent);
-            //    }
-            //}
-            return GetWinningTeams();
+            List<Team> WinningTeams = new List<Team>();
+            foreach (Match m in matches)
+            {
+                if (m.FirstOpponent == m.Winner)
+                {
+                    WinningTeams.Add(m.FirstOpponent);
+                }
+                else
+                {
+                    WinningTeams.Add(m.SecondOpponent);
+                }
+            }
+            return WinningTeams;
         }
 
         public List<Team> GetLosingTeams()
         {
-            //foreach(Match m in matches)
-            //{
-            //    if (m.FirstOpponent == m.Winner) {
-            //        GetLosingTeams().Add(m.SecondOpponent);
-            //    }
-            //    else
-            //    {
-            //        GetLosingTeams().Add(m.FirstOpponent);
-            //    }
-            //}
-            return GetLosingTeams();
+            List<Team> LosingTeams = new List<Team>();
+
+            foreach (Match m in matches)
+            {
+                if (m.FirstOpponent == m.Winner)
+                {
+                    LosingTeams.Add(m.SecondOpponent);
+                }
+                else
+                {
+                    LosingTeams.Add(m.FirstOpponent);
+                }
+            }
+            return LosingTeams;
         }
     }
 }
