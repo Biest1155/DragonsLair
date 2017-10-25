@@ -4,7 +4,7 @@ namespace DragonsLair_1
 {
     public class Round
     {
-        private List<Match> matches = new List<Match>();
+        private List<Match> matches = new List<Match>();       
         
         public void AddMatch(Match m)
         {
@@ -25,14 +25,33 @@ namespace DragonsLair_1
 
         public List<Team> GetWinningTeams()
         {
-            // TODO: Implement this method
-            return null;
+            //foreach (Match m in matches)
+            //{
+            //    if (m.FirstOpponent == m.Winner)
+            //    {
+            //        GetWinningTeams().Add(m.FirstOpponent);
+            //    }
+            //    else
+            //    {
+            //        GetWinningTeams().Add(m.SecondOpponent);
+            //    }
+            //}
+            return GetWinningTeams();
         }
 
         public List<Team> GetLosingTeams()
         {
-            // TODO: Implement this method
-            return null;
+            //foreach(Match m in matches)
+            //{
+            //    if (m.FirstOpponent == m.Winner) {
+            //        GetLosingTeams().Add(m.SecondOpponent);
+            //    }
+            //    else
+            //    {
+            //        GetLosingTeams().Add(m.FirstOpponent);
+            //    }
+            //}
+            return GetLosingTeams();
         }
     }
 }
