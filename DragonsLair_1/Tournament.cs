@@ -11,9 +11,7 @@ namespace DragonsLair_1
             Name = tournamentName;
         }
 
-        public List<Team> GetTeams()
-        {
-            return new List<Team>(new Team[] {
+        public List<Team> Teams = new List<Team>(new Team[] {
                 new Team("The Valyrians"),
                 new Team("The Spartans"),
                 new Team("The Cretans"),
@@ -23,6 +21,10 @@ namespace DragonsLair_1
                 new Team("The Megareans"),
                 new Team("The Corinthians")
             });
+
+        public List<Team> GetTeams()
+        {
+            return Teams;            
         }
 
         public int GetNumberOfRounds()

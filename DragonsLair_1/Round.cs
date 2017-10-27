@@ -5,6 +5,11 @@ namespace DragonsLair_1
     public class Round
     {
         private List<Match> matches = new List<Match>();       
+
+        public List<Match> GetMatches()
+        {
+            return matches;
+        }
         
         public void AddMatch(Match m)
         {

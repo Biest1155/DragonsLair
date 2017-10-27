@@ -7,7 +7,6 @@ namespace DragonsLair_1
     public class Controller
     {
         private TournamentRepo tournamentRepository = new TournamentRepo();
-        public List<Team> Teams;    
 
         public void ShowScore(string tournamentName)
         {
@@ -15,24 +14,40 @@ namespace DragonsLair_1
              * TODO: Calculate for each team how many times they have won
              * Sort based on number of matches won (descending)
              */
-            
-            Tournament CurrentTournament = tournamentRepository.GetTournament(Console.ReadLine());
-            Teams = CurrentTournament.GetTeams();
+
+            Tournament CurrentTournament = tournamentRepository.GetTournament(tournamentName);
+            List<Team> teams = CurrentTournament.GetTeams();
+
+            int[] score = new int[teams.Count];
 
             for (int i = 0; i > CurrentTournament.GetNumberOfRounds(); i++)
             {
                 Round CurrentRound = CurrentTournament.GetRound(i);
-                foreach(Team t in CurrentRound.GetWinningTeams())
+                foreach (Team t in CurrentRound.GetWinningTeams())
                 {
-                    foreach(Team x in Teams)
-                    if (x.Name == t.Name)
-                    {
-                            x.Wins++;
-                    }
-                }             
+                    score[teams.IndexOf(t)]++;
+                }
             }
-            Teams.OrderBy(o => o.Wins).ToList();
-            Console.WriteLine("Implement this method!");
+            for (int i = 0; i < teams.Count; i++)
+            {
+                int x = i;
+                while (x < score.Length - 1 && score[x] < score[x + 1])
+                {
+                    int y = score[x];
+                    Team Temp = teams[x];
+                    score[x] = score[x + 1];
+                    teams[x] = teams[x + 1];
+                    score[x + 1] = y;
+                    teams[x + 1] = Temp;
+
+                    x++;
+                    i++;
+                }
+            }
+            for (int i = 0; i < teams.Count; i++)
+            {
+                Console.WriteLine("Name: " + teams[i].Name + " Score: " + score[i] + "\n");
+            }
         }
 
         public void ScheduleNewRound(string tournamentName, bool printNewMatches = true)
