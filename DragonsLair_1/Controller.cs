@@ -17,42 +17,40 @@ namespace DragonsLair_1
 
             Tournament CurrentTournament = tournamentRepository.GetTournament(tournamentName);
             List<Team> teams = CurrentTournament.GetTeams();
+            List<Team> Tsorted = new List<Team>();
 
             int[] score = new int[teams.Count];
+            int[] Ssorted = new int[teams.Count];
 
+            //creation of score array
             for (int i = 0; i < CurrentTournament.GetNumberOfRounds(); i++)
             {
                 Round CurrentRound = CurrentTournament.GetRound(i);
-                for (int y = 0; y < CurrentRound.GetWinningTeams().Count; y++)
+                for (int y = 0; y < teams.Count; y++)
                 {
-                    foreach (Team t in teams)
+                    foreach (Team t in CurrentRound.GetWinningTeams())
                     {
-                        if (t.Name == CurrentRound.GetWinningTeams()[y].Name)
+                        if (teams[y].Name == t.Name)
                         {
                             score[y]++;
                         }
                     }
                 }
             }
-            for (int i = 0; i < teams.Count; i++)
-            {
-                int x = i;
-                while (x < score.Length - 1 && score[x] < score[x + 1])
-                {
-                    int y = score[x];
-                    Team Temp = teams[x];
-                    score[x] = score[x + 1];
-                    teams[x] = teams[x + 1];
-                    score[x + 1] = y;
-                    teams[x + 1] = Temp;
 
-                    x++;
-                    i++;
-                }
-            }
+            //sorting
             for (int i = 0; i < teams.Count; i++)
             {
-                Console.WriteLine("Name: " + teams[i].Name + " Score: " + score[i] + "\n");
+                int index = Array.IndexOf(score, score.Max());
+                Tsorted.Add(teams[index]);
+                Ssorted[i] = score[index];
+                score[index]=-1;
+            }
+
+            //print
+            for (int i = 0; i < teams.Count; i++)
+            {
+                Console.WriteLine("Name: " + Tsorted[i].Name + " Score: " + Ssorted[i] + "\n");
             }
         }
 
