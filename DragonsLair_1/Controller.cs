@@ -20,12 +20,18 @@ namespace DragonsLair_1
 
             int[] score = new int[teams.Count];
 
-            for (int i = 0; i > CurrentTournament.GetNumberOfRounds(); i++)
+            for (int i = 0; i < CurrentTournament.GetNumberOfRounds(); i++)
             {
                 Round CurrentRound = CurrentTournament.GetRound(i);
-                foreach (Team t in CurrentRound.GetWinningTeams())
+                for (int y = 0; y < CurrentRound.GetWinningTeams().Count; y++)
                 {
-                    score[teams.IndexOf(t)]++;
+                    foreach (Team t in teams)
+                    {
+                        if (t.Name == CurrentRound.GetWinningTeams()[y].Name)
+                        {
+                            score[y]++;
+                        }
+                    }
                 }
             }
             for (int i = 0; i < teams.Count; i++)
