@@ -44,16 +44,10 @@ namespace DragonsLair_1
         public List<Team> GetWinningTeams()
         {
             List<Team> WinningTeams = new List<Team>();
+
             foreach (Match m in matches)
             {
-                if (m.FirstOpponent == m.Winner)
-                {
-                    WinningTeams.Add(m.FirstOpponent);
-                }
-                else
-                {
-                    WinningTeams.Add(m.SecondOpponent);
-                }
+                    WinningTeams.Add(m.Winner);                
             }
             return WinningTeams;
         }
