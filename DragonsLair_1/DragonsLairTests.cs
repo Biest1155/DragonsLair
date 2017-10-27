@@ -11,6 +11,7 @@ namespace DragonsLair_1
     public class DragonsLairTests
     {
         Tournament currentTournament;
+        Controller controller;
 
         [TestInitialize]
         public void SetupForTest()
@@ -60,6 +61,35 @@ namespace DragonsLair_1
                     matchesFinished = false;
             }
             Assert.AreEqual(true, matchesFinished);
+        }
+        [TestMethod]
+
+        public void CheckWinsforeachplayer()
+        {
+            List<Team> Teams;
+            foreach(Team t in Teams)
+            {
+                int expected;
+                switch (t.Name)
+                {
+                    case "The Valyrians":
+                        expected = 2;
+                        break;                                   
+                    case "The Thereans":
+                        expected = 1;
+                        break;
+                    case "The Coans":
+                        expected = 3;
+                        break;                                      
+                    case "The Corinthians":
+                        expected = 1;
+                        break;
+                    default:
+                        expected = 0;
+                        break;
+                }                
+                Assert.AreEqual(expected,t.Wins);
+            }
         }
     }
 }
