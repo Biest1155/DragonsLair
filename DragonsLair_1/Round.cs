@@ -74,5 +74,9 @@ namespace DragonsLair_1
             }
             return LosingTeams;
         }
+        public Team GetFreeRider()
+        {
+            return
+        }
     }
 }
