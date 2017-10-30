@@ -10,11 +10,6 @@ namespace DragonsLair_1
 
         public void ShowScore(string tournamentName)
         {
-            /*
-             * TODO: Calculate for each team how many times they have won
-             * Sort based on number of matches won (descending)
-             */
-
             Tournament CurrentTournament = tournamentRepository.GetTournament(tournamentName);
             List<Team> teams = CurrentTournament.GetTeams();
             List<Team> Tsorted = new List<Team>();
@@ -79,7 +74,7 @@ namespace DragonsLair_1
                     }
                     else
                     {
-                        CurrentTournament.SetStatus(true);
+                        CurrentTournament.SetStatus("Finished");
                     }
                 }
                 else
@@ -87,8 +82,6 @@ namespace DragonsLair_1
                     Console.WriteLine("Error round not finished");
                 }
             }
-
-               
         }
 
         public void SaveMatch(string tournamentName, int roundNumber, string team1, string team2, string winningTeam)

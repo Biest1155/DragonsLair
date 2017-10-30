@@ -5,7 +5,7 @@ namespace DragonsLair_1
     public class Tournament
     {
         public string Name { get; set; }
-
+        private string Status;
         public Tournament(string tournamentName)
         {
             Name = tournamentName;
@@ -87,9 +87,9 @@ namespace DragonsLair_1
             }
             return r;
         }
-        public void SetStatus(Status)
+        public void SetStatus(string Status)
         {
-
+            this.Status = Status;
         }
     }
 }

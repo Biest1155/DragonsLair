@@ -4,8 +4,8 @@ namespace DragonsLair_1
 {
     public class Round
     {
-        private List<Match> matches = new List<Match>();       
-
+        private List<Match> matches = new List<Match>();
+        private Team FreeRider;
         public List<Match> GetMatches()
         {
             return matches;
@@ -76,7 +76,11 @@ namespace DragonsLair_1
         }
         public Team GetFreeRider()
         {
-            return
+            return FreeRider;
+        }
+        public void AddFreeRider(Team FreeRider)
+        {
+            this.FreeRider = FreeRider;
         }
     }
 }
