@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DragonsLair_1
 {
@@ -12,6 +13,7 @@ namespace DragonsLair_1
         }
 
         public List<Team> Teams = new List<Team>();
+        private List<Round> rounds = new List<Round>();
 
         public List<Team> GetTeams()
         {
@@ -29,64 +31,19 @@ namespace DragonsLair_1
 
         public int GetNumberOfRounds()
         {
-            return 3;
+            return rounds.Count;
         }
         
         public Round GetRound(int idx)
         {
-            Round r = new Round();
-            if (idx == 0)
-            {
-                Match match1 = new Match();
-                match1.FirstOpponent = new Team("The Valyrians");
-                match1.SecondOpponent = new Team("The Spartans");
-                match1.Winner = new Team("The Valyrians");
-
-                r.AddMatch(match1);
-
-                Match match2 = new Match();
-                match2.FirstOpponent = new Team("The Cretans");
-                match2.SecondOpponent = new Team("The Thereans");
-                match2.Winner = new Team("The Thereans");
-                r.AddMatch(match2);
-
-                Match match3 = new Match();
-                match3.FirstOpponent = new Team("The Coans");
-                match3.SecondOpponent = new Team("The Cnideans");
-                match3.Winner = new Team("The Coans");
-                r.AddMatch(match3);
-
-                Match match4 = new Match();
-                match4.FirstOpponent = new Team("The Megareans");
-                match4.SecondOpponent = new Team("The Corinthians");
-                match4.Winner = new Team("The Corinthians");
-                r.AddMatch(match4);
-
-            }
-            else if (idx == 1)
-            {
-                Match match1 = new Match();
-                match1.FirstOpponent = new Team("The Valyrians");
-                match1.SecondOpponent = new Team("The Thereans");
-                match1.Winner = new Team("The Valyrians");
-                r.AddMatch(match1);
-
-                Match match2 = new Match();
-                match2.FirstOpponent = new Team("The Coans");
-                match2.SecondOpponent = new Team("The Corinthians");
-                match2.Winner = new Team("The Coans");
-                r.AddMatch(match2);
-            }
-            else if (idx == 2)
-            {
-                Match match1 = new Match();
-                match1.FirstOpponent = new Team("The Valyrians");
-                match1.SecondOpponent = new Team("The Coans");
-                match1.Winner = new Team("The Coans");
-                r.AddMatch(match1);
-            }
-            return r;
+            return rounds[idx];
         }
+
+        internal void AddRound(Round newRound)
+        {
+            rounds.Add(newRound);
+        }
+
         public void SetStatus(string Status)
         {
             this.Status = Status;
