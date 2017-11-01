@@ -87,7 +87,7 @@ namespace DragonsLair_1
                         NewRound.AddFreeRider(newFreeRider);
                     }
 
-                    for (int i = 0; i < teams.Count / 2; i++)
+                    while (teams.Count > 0)
                     {
                         Match match = new Match();
                         Team first = teams[0];
@@ -100,8 +100,11 @@ namespace DragonsLair_1
                         NewRound.AddMatch(match);
                     }
                     CurrentTournament.AddRound(NewRound);
-                    Console.WriteLine("New round was added");
-
+                    Console.WriteLine("New round: " + (NoR+1) + " was added to " + CurrentTournament.Name + "\n" + "with the following matches");
+                    foreach (Match match in NewRound.GetMatches())
+                    {
+                        Console.WriteLine(match.FirstOpponent.Name + " VS " + match.SecondOpponent.Name);
+                    }
                 }
                 else
                 {
@@ -153,7 +156,10 @@ namespace DragonsLair_1
                                 NewRound.AddMatch(match);
                             }
                             CurrentTournament.AddRound(NewRound);
-                            Console.WriteLine("New round was added");
+                            Console.WriteLine("New round: " + (NoR+1) + " was added to " + CurrentTournament.Name + "\n" + "with the following matches");
+                            foreach (Match match in NewRound.GetMatches()) {
+                                Console.WriteLine(match.FirstOpponent.Name + " VS " + match.SecondOpponent.Name);
+                                    }
                         }
                         else
                         {
