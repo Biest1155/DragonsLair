@@ -12,7 +12,16 @@ namespace DragonsLair_1
             Name = tournamentName;
         }
 
-        public List<Team> Teams = new List<Team>();
+        private List<Team> Teams = new List<Team>(new Team[] {
+                new Team("The Valyrians"),
+                new Team("The Spartans"),
+                new Team("The Cretans"),
+                new Team("The Thereans"),
+                new Team("The Coans"),
+                new Team("The Cnideans"),
+                new Team("The Megareans"),
+                new Team("The Corinthians")
+            });
         private List<Round> rounds = new List<Round>();
 
         public List<Team> GetTeams()
@@ -26,7 +35,7 @@ namespace DragonsLair_1
                 new Team("The Cnideans"),
                 new Team("The Megareans"),
                 new Team("The Corinthians")
-            });            
+            });
         }
 
         public Team GetTeam(string NAME)

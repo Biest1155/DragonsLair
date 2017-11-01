@@ -25,9 +25,12 @@ namespace DragonsLair_1
                 {
                     foreach (Team t in CurrentRound.GetWinningTeams())
                     {
-                        if (teams[y].Name == t.Name)
+                        if (t != null)
                         {
-                            score[y]++;
+                            if (teams[y].Name == t.Name)
+                            {
+                                score[y]++;
+                            }
                         }
                     }
                 }
@@ -60,66 +63,107 @@ namespace DragonsLair_1
             if (NoR == 0)
             {
                 teams = CurrentTournament.GetTeams();
-            }
-            else
-            {
-                LastRound = CurrentTournament.GetRound(NoR - 1);
-                isRoundFinished = LastRound.IsMatchesFinished();
-                if (isRoundFinished)
+                if (teams.Count > 1)
                 {
-                    teams = LastRound.GetWinningTeams();
-                    if (teams.Count > 1)
+                    //shuffle
+                    int n = teams.Count;
+                    while (n > 1)
                     {
-                        //shuffle
-                        int n = teams.Count;
-                        while (n > 1)
-                        {
-                            Random rng = new Random();
-                            n--;
-                            int k = rng.Next(n + 1);
-                            Team team = teams[k];
-                            teams[k] = teams[n];
-                            teams[n] = team;
-                        }
-                        //end of shuffle
-
-                        Round NewRound = new Round();                       
-
-                        if (teams.Count % 2 == 1)
-                        {
-                            Team oldFreeRider = LastRound.GetFreeRider();
-                            Team newFreeRider = new Team("newFreeRider");
-                            for (int x = 0; oldFreeRider != newFreeRider; x++)
-                            {
-                                newFreeRider = teams[x];                             
-                            }
-                            teams.Remove(newFreeRider);
-                            teams.Add(oldFreeRider);
-                            NewRound.AddFreeRider(newFreeRider);
-                        }
-
-                        for (int i = 0; i < teams.Count / 2; i++)
-                        {
-                            Match match = new Match();
-                            Team first = teams[0];
-                            teams.Remove(teams[0]);
-                            Team second = teams[0];
-                            teams.Remove(teams[0]);
-
-                            match.FirstOpponent = first;
-                            match.SecondOpponent = second;
-                            NewRound.AddMatch(match);
-                        }
-                        CurrentTournament.AddRound(NewRound);
+                        Random rng = new Random();
+                        n--;
+                        int k = rng.Next(n + 1);
+                        Team team = teams[k];
+                        teams[k] = teams[n];
+                        teams[n] = team;
                     }
-                    else
+                    //end of shuffle
+                    Round NewRound = new Round();
+                    if (teams.Count % 2 == 1)
                     {
-                        CurrentTournament.SetStatus("Finished");
+                       
+                        Team newFreeRider = new Team("newFreeRider");
+                        newFreeRider = teams[teams.Count - 1];
+                        teams.Remove(newFreeRider);                        
+                        NewRound.AddFreeRider(newFreeRider);
                     }
+
+                    for (int i = 0; i < teams.Count / 2; i++)
+                    {
+                        Match match = new Match();
+                        Team first = teams[0];
+                        teams.Remove(teams[0]);
+                        Team second = teams[0];
+                        teams.Remove(teams[0]);
+
+                        match.FirstOpponent = first;
+                        match.SecondOpponent = second;
+                        NewRound.AddMatch(match);
+                    }
+                    CurrentTournament.AddRound(NewRound);
+                    Console.WriteLine("New round was added");
+
                 }
                 else
                 {
-                    Console.WriteLine("Error round not finished");
+                    LastRound = CurrentTournament.GetRound(NoR - 1);
+                    isRoundFinished = LastRound.IsMatchesFinished();
+                    if (isRoundFinished)
+                    {
+                        teams = LastRound.GetWinningTeams();
+                        if (teams.Count > 1)
+                        {
+                            //shuffle
+                            int n = teams.Count;
+                            while (n > 1)
+                            {
+                                Random rng = new Random();
+                                n--;
+                                int k = rng.Next(n + 1);
+                                Team team = teams[k];
+                                teams[k] = teams[n];
+                                teams[n] = team;
+                            }
+                            //end of shuffle
+
+                            Round NewRound = new Round();
+
+                            if (teams.Count % 2 == 1)
+                            {
+                                Team oldFreeRider = LastRound.GetFreeRider();
+                                Team newFreeRider = new Team("newFreeRider");
+                                for (int x = 0; oldFreeRider != newFreeRider; x++)
+                                {
+                                    newFreeRider = teams[x];
+                                }
+                                teams.Remove(newFreeRider);
+                                teams.Add(oldFreeRider);
+                                NewRound.AddFreeRider(newFreeRider);
+                            }
+
+                            for (int i = 0; i < teams.Count / 2; i++)
+                            {
+                                Match match = new Match();
+                                Team first = teams[0];
+                                teams.Remove(teams[0]);
+                                Team second = teams[0];
+                                teams.Remove(teams[0]);
+
+                                match.FirstOpponent = first;
+                                match.SecondOpponent = second;
+                                NewRound.AddMatch(match);
+                            }
+                            CurrentTournament.AddRound(NewRound);
+                            Console.WriteLine("New round was added");
+                        }
+                        else
+                        {
+                            CurrentTournament.SetStatus("Finished");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error round not finished");
+                    }
                 }
             }
         }
@@ -128,7 +172,7 @@ namespace DragonsLair_1
         {
             Tournament currenttournament = tournamentRepository.GetTournament(tournamentName);
 
-            Round Currentround = currenttournament.GetRound(roundNumber);
+            Round Currentround = currenttournament.GetRound(roundNumber-1);
 
             Match currentmatch = Currentround.GetMatch(team1, team2);
 
