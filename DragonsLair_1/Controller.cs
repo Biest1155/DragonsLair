@@ -86,7 +86,27 @@ namespace DragonsLair_1
 
         public void SaveMatch(string tournamentName, int roundNumber, string team1, string team2, string winningTeam)
         {
-            // Do not implement this method
+            Tournament currenttournament = tournamentRepository.GetTournament(tournamentName);
+
+            Round Currentround = currenttournament.GetRound(roundNumber);
+
+            Match currentmatch = Currentround.GetMatch(team1, team2);
+
+            if (currentmatch != null)
+            {
+                if (winningTeam==team1||winningTeam==team2) {
+                    currentmatch.Winner = currenttournament.GetTeam(winningTeam);
+                    Console.WriteLine("Winner has been set");
+                }
+                else
+                {
+                    Console.WriteLine("The chosen winner is neither team 1 or 2");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Match not found");
+            }
         }
     }
 }

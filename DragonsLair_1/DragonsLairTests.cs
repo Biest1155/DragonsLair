@@ -62,13 +62,10 @@ namespace DragonsLair_1
             }
             Assert.AreEqual(true, matchesFinished);
         }
-        [TestMethod]
+        //[TestMethod]
 
-        public void CheckWinsforeachplayer()
-        {
-           
-                
-            
-        }
+        //public void CheckWinsforeachplayer()
+        //{
+        //}
     }
 }

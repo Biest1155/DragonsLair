@@ -27,6 +27,18 @@ namespace DragonsLair_1
             });            
         }
 
+        public Team GetTeam(string NAME)
+        {
+            foreach(Team team in Teams)
+            {
+                if (team.Name == NAME)
+                {
+                    return team;
+                }
+            }
+            return null;
+        }
+
         public int GetNumberOfRounds()
         {
             return 3;
